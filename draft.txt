@@ -1,0 +1,108 @@
+console.log(document.documentElement);
+console.log(document.body);
+console.log(document.head);
+
+const allSections = document.querySelectorAll(".section")[0];
+console.log(allSections);
+//Creating and Inserting elements
+const header = document.querySelector(".header");
+const message = document.createElement("div");
+message.classList.add("cookie-message");
+message.textContent = "We use your cookies for selling you some bullshit stuff. Thank you and sorry for any inconveniences!"
+// header.prepend(message)
+// // header.before(message)
+header.append(message)
+// header.append(message.cloneNode(true))
+
+//Styles
+message.style.backgroundColor = "#444"
+message.style.width = "103.7%"
+console.log(message.style.width);
+console.log(message.style.color);// it works only for inline styles(the ones set manually with styles property)
+console.log(getComputedStyle(message).height); //but works with this ONE
+
+message.style.height = Number.parseFloat(getComputedStyle(message).height, 10) + 40 + "px";
+
+document.documentElement.style.setProperty("--color-primary", "teal")//For changing 'custom' properties
+
+//Attributes
+const logo = document.querySelector(".nav__logo");
+console.log(logo);
+//
+const randomInt = (min, max) => 
+  Math.floor(Math.random() * (max - min + 1) + min);
+const randomColor = () =>  
+  `rgb(${randomInt(0, 255)}, ${randomInt(0, 255)}, ${randomInt(0,255)})`;
+console.log(randomColor(0,255));
+
+document.querySelector(".nav__link").addEventListener("click", function(e) {
+  this.style.backgroundColor = randomColor();
+
+  e.stopPropagation();
+});
+
+document.querySelector(".nav__links").addEventListener("click", function(e) {
+  this.style.backgroundColor = randomColor();
+})
+//
+btnScrollTo.addEventListener("click", e => {
+  const s1coords = section1.getBoundingClientRect();
+  console.log(s1coords);
+  console.log(e.target.getBoundingClientRect());
+
+  // ---Scrolling---
+
+  // window.scrollTo(
+  //   s1coords.left + window.pageXOffset, 
+  //   s1coords.top +  window.pageYOffset
+  // );
+
+  // window.scrollTo({
+  //   left: s1coords.left + window.pageXOffset, 
+  //   top: s1coords.top +  window.pageYOffset,
+  //   behavior: "smooth"
+  // })
+
+  section1.scrollIntoView({ behavior: "smooth" });
+});
+//
+
+const btnScrollTo = document.querySelector(".btn--scroll-to");
+const section1 = document.querySelector("#section--1");
+
+btnScrollTo.addEventListener("click", e => {
+  const s1coords = section1.getBoundingClientRect();
+  console.log(s1coords);
+  console.log(e.target.getBoundingClientRect());
+
+  // ---Scrolling---
+
+  // window.scrollTo(
+  //   s1coords.left + window.pageXOffset, 
+  //   s1coords.top +  window.pageYOffset
+  // );
+
+  // window.scrollTo({
+  //   left: s1coords.left + window.pageXOffset, 
+  //   top: s1coords.top +  window.pageYOffset,
+  //   behavior: "smooth"
+  // })
+
+  section1.scrollIntoView({ behavior: "smooth" });
+});
+
+//Downwards
+const h1 = document.querySelector("h1");
+console.log(h1.querySelectorAll('.highlight'));
+console.log(h1.childNodes);
+console.log(h1.children);
+h1.firstElementChild.style.color = "white"
+h1.lastElementChild.style.color = "white"
+//Upwards
+console.log(h1.parentNode);
+console.log(h1.parentElement);
+//Upwards: Parent
+h1.closest('div').style.background = "orange"
+//Going sideways
+console.log(h1.nextElementSibling);
+console.log(h1.nextSibling);
