@@ -230,3 +230,41 @@ function prevSlide() {
 
 btnRight.addEventListener("click", nextSlide);
 btnLeft.addEventListener("click", prevSlide);
+
+//Implementing keywords
+const dotContainer = document.querySelector(".dots")
+
+function createDots() {
+  slides.forEach(function(_, i) {
+    dotContainer.insertAdjacentHTML("beforeend",
+    `<button class = "dots__dot" data-slide="${i}"></button>`
+    )
+  })
+}
+createDots();
+
+//Active 
+function activateDot(slide) {
+  document
+    .querySelectorAll(".dots__dot")
+    .forEach(dot =>dot.classList.remove("dots__dot--active"));
+  document
+  .querySelector(`.dots__dot[data-slide="${slide}"]`)
+    .classList.add("dots__dot--active")
+}
+activateDot(0);
+
+dotContainer.addEventListener("click", function (e) {
+  if (e.target.classList.contains("dots__dot")) {
+    const { slide } = e.target.dataset;
+    goToSlide(slide);
+      //To activate dot
+    activateDot(slide);
+  }
+})
+
+document.addEventListener("keydown", function (e) {
+  // if (e.key === "ArrowRight") prevSlide();
+  e.key === "ArrowRight" && nextSlide();
+  e.key === "ArrowLeft" && prevSlide();
+})
